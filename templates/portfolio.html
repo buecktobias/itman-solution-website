@@ -43,8 +43,28 @@
                     </p>
                 </div>
             </div>
+            <div class="row mt-5">
+                <div class="col">
+                <h4>{{ data_science_title }}</h4>
+                    {{ data_science_description|safe }}
+                    <div class="row mt-3">
+                        <div class="col">
+                            <img class="img-fluid w-50" src="{{url_for("static", filename="covid_wordcloud.png")}}" alt="covid19" title="covid19">
+                        </div>
+                        <div class="col">
+                            {{ text_wordcloud }}
+                        </div>
+                    </div>
+                    <hr>
+                <h6>{{ nyc_price_title }}</h6>
+                    <p>{{ nyc_price_text|safe }}</p>
+                    <img class="img-fluid w-75" src="{{url_for("static", filename="nyc_prices_map.png")}}" alt="NYC_Prices" title="NYC Prices">
+                </div>
+                <a href="https://www.kaggle.com/tobiasbueck"> {{ kaggle_profile }}</a>
+            </div>
         </div>
     </div>
+
     <div class="col-lg-2 col-md-1 col-sm-0 col-12">
 
     </div>
