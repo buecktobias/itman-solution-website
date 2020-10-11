@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
+{% extends "basis.html" %}
+{% block head %}
     <meta charset="UTF-8">
     <title>Tobias Bück Portfolio</title>
-</head>
-<body>
-<h1>Tobias Bücks Portfolio</h1>
-</body>
-</html>
+{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col">
+      <img src="{{ url_for('static', filename = 'profile.jpeg') }}" alt="Profil Bild Tobias Bück" class="img-thumbnail">
+    </div>
+    <div class="col-6">
+      <h1>Tobias Bücks Portfolio</h1>
+    </div>
+    <div class="col">
+
+    </div>
+
+{% endblock content %}
