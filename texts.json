@@ -1,10 +1,13 @@
 {
             "de":
                 {
-                    "short_description_text": "Ich interessiere mich sehr für Software Entwicklung. In meiner Freizeit programmiere ich viel."
+                    "short_description_text": "Ich interessiere mich sehr für Software Entwicklung. In meiner Freizeit programmiere ich viel.",
+                    "ahs_project_text": "Ich habe für die JGU-Mainz die Webseite des Hochschulsports entwickelt.Diese habe ich mit Wordpress entwickelt.<br/><a href=\"https://www.ahs.uni-mainz.de/\">Zur Webseite</a>"
                 },
             "en":
                 {
-                    "short_description_text": "I am interested in Software Development."
+                    "short_description_text": "I am interested in Software Development. Also doing a lot of Data Science Projects.",
+                    "ahs_project_text": "I developed the website of the university sports at the Johannes Gutenberg University in Mainz. The website was developed with Wordpress.<br/><a href=\"https://www.ahs.uni-mainz.de/\">The Website</a>"
+
                 }
 }

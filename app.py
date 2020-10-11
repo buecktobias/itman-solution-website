@@ -1,12 +1,16 @@
 from flask import Flask
 from flask import render_template, redirect, url_for
-app = Flask(__name__)
 from flask import request
 import json
+app = Flask(__name__)
 
 
 def get_languages():
     return ["de", "en"]
+
+
+def get_default_language():
+    return "de"
 
 
 def get_texts(language_code):
@@ -15,15 +19,12 @@ def get_texts(language_code):
     return language_texts.get(language_code)
 
 
-def detect_language(accept_language):
-    accept_language.split(";")
-
 @app.route('/<language_code>/portfolio/')
 def portfolio_page(language_code):
+    if language_code not in get_languages():
+        return redirect(url_for("portfolio_page", language_code=get_default_language()))
     texts = get_texts(language_code)
-
     return render_template("portfolio.html", **texts)
-
 
 
 @app.route('/')
