@@ -1,6 +1,5 @@
 {% extends "basis.html" %}
 {% block head %}
-    <meta charset="UTF-8">
     <title>Tobias Bück Portfolio</title>
 {% endblock %}
 {% block content %}
@@ -17,7 +16,7 @@
     <div class="col-lg-7 col-md-8 col-sm-8 col-12">
       <div class="bg-dark text-white p-3">
         <h1>Tobias Bücks Portfolio</h1>
-          <h3> Software Developer/ Data Science Enthusiast</h3>
+          <h3> Software Developer</h3>
           <hr>
           {{ short_description_text }}
       </div>
@@ -25,17 +24,24 @@
         <hr>
         <div>
             <div class="row">
-                <div class="col"><a href="https://www.uni-mainz.de"><img class="img-fluid" src="{{url_for("static", filename="jgu.png")}}" alt="JGU" title="JGU"></a></div>
-                <div class="col-8">
-                    <h4>AHS Website</h4>
+                <div class="col-sm-4 col-12 text-center"><a href="https://www.uni-mainz.de"><img class="img-fluid" src="{{url_for("static", filename="jgu.png")}}" alt="JGU" title="JGU"></a></div>
+                <div class="col-sm-8 col-12">
+                    <h4>{{ ahs_project_title|safe}}</h4>
                     <p>
                         {{ ahs_project_text|safe }}
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col"></div>
-
+            <div class="row mt-5">
+                <div class="col-sm-4 col-12 text-center"><a href="https://bwinf.de/"><img class="img-fluid w-50" src="{{url_for("static", filename="BWinf38_image.jpg")}}" alt="BWinf" title="BWinf"></a></div>
+                <div class="col-sm-8 col-12">
+                    <h4>{{ facharbeit_project_title|safe }}</h4>
+                    <p>
+                        {{ facharbeit_text|safe }}
+                        <br/>
+                        <a href="{{ url_for("static", filename="Facharbeit.pdf") }}">Research Paper</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
