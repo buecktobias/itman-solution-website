@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template, redirect, url_for
 from flask import request
 import json
+
 app = Flask(__name__)
 
 
@@ -18,6 +19,9 @@ def get_texts(language_code):
         language_texts = json.load(f)
     return language_texts.get(language_code)
 
+@app.route("/sitemap/")
+def sitemap():
+    return redirect(url_for('static', filename="sitemap.xml"))
 
 @app.route('/<language_code>/portfolio/')
 def portfolio_page(language_code):
