@@ -10,7 +10,8 @@
     "text_wordcloud": "Ich habe aus den Twitter Tweets mit #covid19 eine Wordcloud aus den meist verwendeten Wörtern erzeugt.",
     "nyc_price_title": "Karte der Wohnungs Preise in NYC",
     "nyc_price_text": "Ich habe für die Preise von Wohnungen in NYC, die Durschnittlichen Preise der Stadtteile Manhattan, Bronx, The Queens, Brooklyn berechnet. Daraus habe ich eine Karte mit den Wohnungs Preisen erstellt.",
-    "kaggle_profile": "Mein kaggle Profil"
+    "kaggle_profile": "Mein kaggle Profil",
+    "nlp_blog_title": "Mein NLP Blog - Klassifizierung von TripAdvisor Bewertungen"
   },
   "en": {
     "short_description_text": "I am interested in Software Development. Also doing a lot of Data Science Projects.",
@@ -23,6 +24,7 @@
     "text_wordcloud": "I created a wordcloud with the most used words in Twitter tweets with the hashtag covid19.",
     "nyc_price_title": "Map NYC Apartment Prices",
     "nyc_price_text": "I created a map with the average prices of the different regions in NYC. The map shows where the apartments are cheap in NYC.",
-    "kaggle_profile": "My kaggle profile"
+    "kaggle_profile": "My kaggle profile",
+    "nlp_blog_title": "My NLP Blog - Classification of Trip Advisor Reviews"
   }
 }
