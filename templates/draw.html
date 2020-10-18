@@ -1,0 +1,128 @@
+{% extends "basis.html" %}
+{% block head %}
+    <title>Draw Game</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="draw2.css") }}">
+
+{% endblock %}
+{% block content %}
+    <h1>Free Hand Drawer using HTML5 Canvas</h1>
+    <canvas id="canvas-display" width="400" height="400" ></canvas>
+    <button onclick="save();">Save</button>
+
+    <script type="text/javascript">
+            $(document).ready(function(){
+                $('#canvas-display').paintBrush();
+                });
+              (function($) {
+      $.fn.paintBrush = function(options) {
+          var undoHistory = [];
+              var settings = {
+               'targetID' : 'canvas-display'
+          },
+
+              $this = $(this),
+              o = {},
+              ui = {},
+
+          core = {
+              init : function(options) {
+                  ui.$loadParentDiv = o.targetID;
+                  core.draw();
+                  //core.toggleScripts();
+              },
+
+              canvasInit : function() {
+                      context = document.getElementById("canvas-display").getContext("2d");
+                      context.lineCap = "round";
+                      context.lineWidth = 40;
+                      //Fill it with white background
+                      context.save();
+                      context.fillStyle = '#fff';
+                      context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+                      context.restore();
+              },
+
+              saveActions : function() {
+                      var imgData = document.getElementById("canvas-display").toDataURL("image/png");
+                      undoHistory.push(imgData);
+                      $('#undo').removeAttr('disabled');
+
+              },
+
+
+              draw : function() {
+                      var canvas, cntxt, top, left, draw, draw = 0;
+                      canvas = document.getElementById("canvas-display");
+                      cntxt = canvas.getContext("2d");
+                      top = $('#canvas-display').offset().top;
+                      left = $('#canvas-display').offset().left;
+                      core.canvasInit();
+
+                      //Drawing Code
+                      $('#canvas-display').mousedown(function(e){
+                          if(e.button == 0){
+                              draw = 1;
+                              core.saveActions(); //Start The drawing flow. Save the state
+                              cntxt.beginPath();
+                              cntxt.moveTo(e.pageX-left, e.pageY-top);
+                          } else {
+                              draw = 0;
+                          }
+                      })
+                       .mouseup(function(e){
+                              if(e.button != 0){
+                                  draw = 1;
+                              } else {
+                                  draw = 0;
+                                  cntxt.lineTo(e.pageX-left+1, e.pageY-top+1);
+                                  cntxt.stroke();
+                                  cntxt.closePath();
+                              }
+                      })
+                       .mousemove(function(e){
+                              if(draw == 1){
+                                  cntxt.lineTo(e.pageX-left+1, e.pageY-top+1);
+                                  cntxt.stroke();
+                              }
+                      });
+
+              },
+
+
+              toggleScripts : function() {
+                       $('#colors').slideToggle(400);
+                       $('#control-buttons').toggle(400);
+              }
+          };
+
+          $.extend(true, o, settings, options);
+
+          core.init();
+
+      };
+  })(jQuery);
+
+
+        </script>
+    <script type="text/javascript">
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+    function save() {
+        var can = document.getElementById("canvas-display")
+        var ctx = can.getContext("2d")
+        var img = ctx.getImageData(0, 0, 400, 400)
+        var data = new FormData();
+        data.append("data" , img.data.toString());
+        var filename = Math.floor((Math.random() * 1000000)).toString();
+        data.append("filename" , filename);
+        var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+        xhr.open( 'post', '/draw/save', true );
+        xhr.send(data);
+        setCookie("img", img.data.toString(), 1);
+    }
+    </script>
+{% endblock %}
