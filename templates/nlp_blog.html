@@ -3,26 +3,54 @@
     <title>NLP blog</title>
 {% endblock %}
 {% block innerColumn %}
+    <img class="img-fluid m-3" src="{{ url_for("static", filename="tripadvisor.png") }}">
     <h1>NLP with Trip Advisor Hotel Reviews</h1>
     <hr>
-    <p>First of all, load data from kaggle trip advisor hotel reviews <a href="https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews">kaggle dataset</a>.
-    Load Data as pandas Dataframe</p>
+    <p class="mt-3 mb-3">First of all, load data from kaggle trip advisor hotel reviews <a href="https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews">kaggle dataset</a>.
+    Load Data as pandas Dataframe.</p>
     <code>
     df = pd.read_csv("/kaggle/input/trip-advisor-hotel-reviews/tripadvisor_hotel_reviews.csv")
     </code>
-    <p>Explore data with df.head() - shows first 5 rows.</p>
+    <p class="mt-3 mb-3">Explore data with df.head() - shows first 5 rows.</p>
     <code>
     df.head()
     </code>
     <samp>
-    Review	Rating
-    0	nice hotel expensive parking got good deal sta...	4
-    1	ok nothing special charge diamond member hilto...	2
-    2	nice rooms not 4* experience hotel monaco seat...	3
-    3	unique, great stay, wonderful time hotel monac...	5
-    4	great stay great stay, went seahawk game aweso...	5
+    <small>
+        <div class="row mt-5 mb-5">
+            <div class="col">
+    <table class="table  table-sm">
+        <tr><td></td><td>Review</td><td>	Rating</td></tr>
+        <tr><td>0</td>	<td>nice hotel expensive parking got good deal sta...</td><td>4</td></tr>
+        <tr><td>1</td><td>	ok nothing special charge diamond member hilto...</td><td>2</td></tr>
+        <tr><td>2</td><td>	nice rooms not 4* experience hotel monaco seat...</td><td>3</td></tr>
+        <tr><td>3</td><td>	unique, great stay, wonderful time hotel monac...</td><td>5</td></tr>
+        <tr><td>4</td><td>	great stay great stay, went seahawk game aweso...</td><td>5</td></tr>
+    </table>
+                </div>
+            <div class="col"></div>
+            </div>
+    </small>
     </samp>
-    <p>
+    <p class="mt-3 mb-3">
     We can see that each row has a review and a rating. With df.describe() - we can get more information about the numerical columns in the dataframe.
+    </p>
+    <code>df.describe()</code>
+    <br/>
+    <small>
+             Rating <br/>
+count  20491.000000 <br/>
+mean       3.952223 <br/>
+std        1.233030 <br/>
+min        1.000000 <br/>
+25%        3.000000 <br/>
+50%        4.000000 <br/>
+75%        5.000000 <br/>
+max        5.000000 <br/>
+    </small>
+    <p class="mt-3 mb-3">
+    The Ratings are from 1 to 5. The average( or mean) is 3.95. The Median is 4.
+The inter-quartile range is 3 - 5 and the standard deviation is 1.23.
+We can also plot the distribution with a histogram.
     </p>
 {% endblock %}
