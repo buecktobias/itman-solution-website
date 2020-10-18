@@ -3,8 +3,9 @@
     <title>NLP blog</title>
 {% endblock %}
 {% block innerColumn %}
-    <img class="img-fluid m-3" src="{{ url_for("static", filename="nlp-blog/tripadvisor.png") }}">
+    <img class="img-fluid m-3" src="{{ url_for("static", filename="nlp-blog/tripadvisor.png") }}" alt="Tripadvisor">
     <h1>NLP with Trip Advisor Hotel Reviews</h1>
+    <h3>How to classify Text with machine learning algorithms</h3>
     <hr>
     <p class="mt-3 mb-3">First of all, load data from kaggle trip advisor hotel reviews <a href="https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews">kaggle dataset</a>.
     Load Data as pandas Dataframe.</p>
@@ -34,7 +35,16 @@
     </small>
     </samp>
     <p class="mt-3 mb-3">
-    We can see that each row has a review and a rating. With df.describe() - we can get more information about the numerical columns in the dataframe.
+    We can see that each row has a review and a rating.
+    Now we will start developing our "classification robot". To correctly score our "robot" we need to split our data in training and testing.
+    The training set will contain 15 000 rows and the test set about 5 000.
+    </p>
+    <code>
+    train_df = df.iloc[:][:15000]
+    test_df = df.iloc[:][15000:]
+    </code>
+    <p class="mt-3 mb-3">
+    With df.describe() - we can get more information about the numerical columns in the dataframe.
     </p>
     <code>df.describe()</code>
     <br/>
@@ -60,5 +70,28 @@ We can also plot the distribution with a histogram.
     bins = [1, 2, 3, 4,5] <br/>
     plt.hist(ratings, bins, rwidth=0.8) <br/>
     </code>
-    <img class="img-fluid mt-3 mb-3" src="{{ url_for("static", filename="nlp-blog/histogram.png") }}">
+    <img class="img-fluid mt-3 mb-3" src="{{ url_for("static", filename="nlp-blog/histogram2.png") }}" alt="Histogram">
+    <p>
+    Therefore I used matplotlib. The histogram shows, that there are much more 5 star ratings. Circa 6 000 5 star ratings from a total of 15 k ratings.
+Now we can build a naive algorithm to classify the reviews. Our "robot" will always predict 5 stars.
+    </p>
+    <code>
+    amount_ratings = len(test_df) <br/>
+    robots_predictions = list([5 for i in range(amount_ratings)])<br/>
+    def accuracy(predictions, real): <br/>
+    >>  amount_correct = list(map(lambda x: x[0] == x[1], zip(predictions, real))).count(True)<br/>
+    >>  return amount_correct / len(predictions)<br/>
+    accuracy(robots_predictions, list(test_df["Rating"]))<br/>
+    </code>
+    <samp>
+    0.4826079038426516
+    </samp>
+    <p class="mt-3 mb-3">
+    We achieved an accuracy of 48% this is pretty good. Our robot always predicted 5 stars, without knowing anything about the text written.
+    Now let's try improving our robot so he can predict better.
+    Therefore our robot will look at the text.
+    <br/>
+    First of all we have to transform the text to words, we are going to use nltk for that. It is a very useful libary for NLP.
+    </p>
+
 {% endblock %}
