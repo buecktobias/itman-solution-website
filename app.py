@@ -36,7 +36,7 @@ def portfolio_page(language_code="de"):
     return render_template("portfolio.html", **texts)
 
 
-@app.route("/<language_code>/blogs/nlp-with-trip-advisor-reviews")
+@app.route("/<language_code>/blogs/")
 def blogs(language_code="de"):
     if request.cookies["languageCode"] != language_code:
         return redirect(url_for("blogs", language_code=request.cookies["languageCode"]))
@@ -47,10 +47,11 @@ def blogs(language_code="de"):
 def blog_nlp(language_code="de"):
     if language_code != "en":
         return redirect(url_for("blog_nlp", language_code="en"))
-    else:
-        all_ = {}
-        all_["lang_code"] = language_code
-        return render_template("nlp_blog.html", **all_)
+
+    with open('nlp_blog') as f:
+        blog = json.load(f)
+    blog["lang_code"] = language_code
+    return render_template("nlp_blog_2.html", **blog)
 
 
 @app.route("/draw/")

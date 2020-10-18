@@ -1,0 +1,22 @@
+{% extends  "blogs_basis.html" %}
+{% block innerColumn%}
+    <img class="img-fluid mt-3 mb-3" src="{{ url_for("static", filename="nlp-blog/tripadvisor.png") }}" alt="Tripadvisor">
+    <h1>{{ blog_title }}</h1>
+    <h3>{{ blog_sub_title }}</h3>
+    <hr>
+    {% for element in blog_elements %}
+    <p>
+    {{ element["p"]|safe }}
+    </p>
+    {% if "c" in element  %}
+    <code>
+    {{ element["c"] |safe}}
+    </code>
+    {% endif %}
+    {% if "o" in element %}
+    <samp>
+        {{ element["o"] |safe }}
+    </samp>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

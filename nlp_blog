@@ -1,0 +1,42 @@
+{
+    "blog_author": "Tobias Bück",
+    "blog_created": "18/10/2020",
+    "blog_title": "NLP with Trip Advisor Reviews!",
+    "blog_sub_title": "How to classify Text with machine learning algorithms",
+    "blog_elements": [
+      {
+        "p": "First of all, load data from kaggle trip advisor hotel reviews <a href=\"https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews\">kaggle dataset</a>.\n    Load Data as pandas Dataframe.",
+        "c": "    import pandas as pd<br/>    df = pd.read_csv(\"/kaggle/input/trip-advisor-hotel-reviews/tripadvisor_hotel_reviews.csv\")"
+      },
+      {
+        "p": "Explore data with df.head() - shows first 5 rows.",
+        "c": "df.head()",
+        "o": "<small>\n        <div class=\"row mt-5 mb-5\">\n            <div class=\"col\">\n    <table class=\"table  table-sm\">\n        <tr><td></td><td>Review</td><td>\tRating</td></tr>\n        <tr><td>0</td>\t<td>nice hotel expensive parking got good deal sta...</td><td>4</td></tr>\n        <tr><td>1</td><td>\tok nothing special charge diamond member hilto...</td><td>2</td></tr>\n        <tr><td>2</td><td>\tnice rooms not 4* experience hotel monaco seat...</td><td>3</td></tr>\n        <tr><td>3</td><td>\tunique, great stay, wonderful time hotel monac...</td><td>5</td></tr>\n        <tr><td>4</td><td>\tgreat stay great stay, went seahawk game aweso...</td><td>5</td></tr>\n    </table>\n                </div>\n            <div class=\"col\"></div>\n            </div>\n    </small>\n    </samp>"
+      },
+      {
+        "p": "    We can see that each row has a review and a rating.\n    Now we will start developing our \"classification robot\". To correctly score our \"robot\" we need to split our data in training and testing.\n    The training set will contain 15 000 rows and the test set about 5 000.\n    ",
+        "c": "    train_df = df.iloc[:][:15000]\n    test_df = df.iloc[:][15000:]"
+      },
+      {
+        "p": "With df.describe() - we can get more information about the numerical columns in the dataframe.",
+        "c": "df.describe()",
+        "o": "  <small>\n             Rating <br/>\ncount  20491.000000 <br/>\nmean       3.952223 <br/>\nstd        1.233030 <br/>\nmin        1.000000 <br/>\n25%        3.000000 <br/>\n50%        4.000000 <br/>\n75%        5.000000 <br/>\nmax        5.000000 <br/>\n    </small>"
+      },
+      {
+        "p": "    The Ratings are from 1 to 5. The average( or mean) is 3.95. The Median is 4.\nThe inter-quartile range is 3 - 5 and the standard deviation is 1.23.\nWe can also plot the distribution with a histogram.",
+        "c":     "from matplotlib import pyplot as plt <br/>ratings = df[\"Rating\"] <br/>bins = [1, 2, 3, 4,5] <br/>plt.hist(ratings, bins, rwidth=0.8) <br/>",
+        "o": "<img class=\"img-fluid mt-3 mb-3\" src=\"/static/nlp-blog/histogram2.png\" alt=\"Histogram\">\n"
+
+      },
+      {
+        "p": "Therefore I used matplotlib. The histogram shows, that there are much more 5 star ratings. Circa 6 000 5 star ratings from a total of 15 k ratings.\nNow we can build a naive algorithm to classify the reviews. Our \"robot\" will always predict 5 stars.\n",
+        "c":"    amount_ratings = len(test_df) <br/>\n    robots_predictions = list([5 for i in range(amount_ratings)])<br/>\n    def accuracy(predictions, real): <br/>\n    >>  amount_correct = list(map(lambda x: x[0] == x[1], zip(predictions, real))).count(True)<br/>\n    >>  return amount_correct / len(predictions)<br/>\n    accuracy(robots_predictions, list(test_df[\"Rating\"]))<br/>\n    ",
+        "o": "0.4826079038426516"
+
+      },
+      {
+        "p": "    We achieved an accuracy of 48% this is pretty good. Our robot always predicted 5 stars, without knowing anything about the text written.\n    Now let's try improving our robot so he can predict better.\n    Therefore our robot will look at the text.\n    <br/>\n    First of all we have to transform the text to words, we are going to use nltk for that. It is a very useful libary for NLP.\n "
+
+      }
+    ]
+}
