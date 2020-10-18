@@ -67,22 +67,17 @@ def draw_game_save():
         f.write(data)
     return render_template("draw.html")
 
-@app.route('/get_language/<redirect_url>/')
-def get_language(redirect_url):
-    print(url_for("home"))
-    try:
-        best_language = request.accept_languages.best_match(get_languages())
-    except:
-        best_language = "de"
-    resp = make_response(redirect(redirect_url.replace("??????", "/")))
-    resp.set_cookie('languageCode', best_language)
-    return resp
-
 @app.route('/')
 def home():
     if "languageCode" in request.cookies:
         return redirect(url_for("portfolio_page", language_code=request.cookies["languageCode"]))
-    return redirect(url_for("get_language", redirect_url=urllib.parse.quote(request.url).replace("/", "??????")))
+    try:
+        best_language = request.accept_languages.best_match(get_languages())
+    except:
+        best_language = "de"
+    resp = make_response(redirect("#"))
+    resp.set_cookie('languageCode', best_language)
+    return resp
 
 
 if __name__ == '__main__':
