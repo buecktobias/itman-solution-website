@@ -28,7 +28,19 @@ def portfolio_page(language_code):
     if language_code not in get_languages():
         return redirect(url_for("portfolio_page", language_code=get_default_language()))
     texts = get_texts(language_code)
+    all_ = texts
+    all_["lang_code"] = language_code
     return render_template("portfolio.html", **texts)
+
+
+@app.route("/<language_code>/blogs/nlp-with-trip-advisor-reviews")
+def blog_nlp(language_code):
+    if language_code != "en":
+        return redirect(url_for("blog_nlp", language_code="en"))
+    else:
+        all_ = {}
+        all_["lang_code"] = language_code
+        return render_template("nlp_blog.html", **all_)
 
 
 @app.route('/')

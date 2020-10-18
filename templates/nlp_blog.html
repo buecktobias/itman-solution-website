@@ -1,0 +1,28 @@
+{% extends "blogs_basis.html" %}
+{% block head %}
+    <title>NLP blog</title>
+{% endblock %}
+{% block innerColumn %}
+    <h1>NLP with Trip Advisor Hotel Reviews</h1>
+    <hr>
+    <p>First of all, load data from kaggle trip advisor hotel reviews <a href="https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews">kaggle dataset</a>.
+    Load Data as pandas Dataframe</p>
+    <code>
+    df = pd.read_csv("/kaggle/input/trip-advisor-hotel-reviews/tripadvisor_hotel_reviews.csv")
+    </code>
+    <p>Explore data with df.head() - shows first 5 rows.</p>
+    <code>
+    df.head()
+    </code>
+    <samp>
+    Review	Rating
+    0	nice hotel expensive parking got good deal sta...	4
+    1	ok nothing special charge diamond member hilto...	2
+    2	nice rooms not 4* experience hotel monaco seat...	3
+    3	unique, great stay, wonderful time hotel monac...	5
+    4	great stay great stay, went seahawk game aweso...	5
+    </samp>
+    <p>
+    We can see that each row has a review and a rating. With df.describe() - we can get more information about the numerical columns in the dataframe.
+    </p>
+{% endblock %}
