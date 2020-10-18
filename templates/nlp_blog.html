@@ -3,12 +3,13 @@
     <title>NLP blog</title>
 {% endblock %}
 {% block innerColumn %}
-    <img class="img-fluid m-3" src="{{ url_for("static", filename="tripadvisor.png") }}">
+    <img class="img-fluid m-3" src="{{ url_for("static", filename="nlp-blog/tripadvisor.png") }}">
     <h1>NLP with Trip Advisor Hotel Reviews</h1>
     <hr>
     <p class="mt-3 mb-3">First of all, load data from kaggle trip advisor hotel reviews <a href="https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews">kaggle dataset</a>.
     Load Data as pandas Dataframe.</p>
     <code>
+    import pandas as pd
     df = pd.read_csv("/kaggle/input/trip-advisor-hotel-reviews/tripadvisor_hotel_reviews.csv")
     </code>
     <p class="mt-3 mb-3">Explore data with df.head() - shows first 5 rows.</p>
@@ -53,4 +54,11 @@ max        5.000000 <br/>
 The inter-quartile range is 3 - 5 and the standard deviation is 1.23.
 We can also plot the distribution with a histogram.
     </p>
+    <code>
+    from matplotlib import pyplot as plt <br/>
+    ratings = df["Rating"] <br/>
+    bins = [1, 2, 3, 4,5] <br/>
+    plt.hist(ratings, bins, rwidth=0.8) <br/>
+    </code>
+    <img class="img-fluid mt-3 mb-3" src="{{ url_for("static", filename="nlp-blog/histogram.png") }}">
 {% endblock %}
