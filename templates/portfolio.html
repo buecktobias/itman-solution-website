@@ -1,38 +1,63 @@
 {% extends "basis.html" %}
 {% block head %}
     <title>Tobias Bück Portfolio</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/js/star-rating.min.js" type="text/javascript"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" rel="stylesheet">
+
 {% endblock %}
 {% block content %}
     <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-4 col-12">
-      <img src="{{ url_for('static', filename = 'profile.jpeg') }}" alt="Profil Bild Tobias Bück" class="img-thumbnail">
-        <p class="mt-3 text-secondary"><img src="{{url_for("static", filename="icons/person-circle.svg")}}" alt="Person Icon" width="25" height="25" title="Person Name"> Tobias Bück</p>
-        <p class="mt-3 text-secondary"><a class="text-secondary" href="mailto:buecktobias@gmail.com"><img src="{{url_for("static", filename="icons/envelope-fill.svg")}}" alt="Email" width="25" height="25" title="Email"> buecktobias@gmail.com</a></p>
-        <p class="mt-3 text-secondary"><img src="{{url_for("static", filename="icons/signpost.svg")}}" alt="Signpost Icon" width="25" height="25" title="City"> Mainz/Germany</p>
-        <p class="mt-3 text-secondary"><img src="{{url_for("static", filename="icons/calendar.svg")}}" alt="Calendar Icon" width="25" height="25" title="Birthday"> 16. October, 2001</p>
-        <p class="mt-3 text-secondary"><a class="text-secondary" href="https://www.linkedin.com/in/tobias-b%C3%BCck-025300182/"><img src="{{url_for("static", filename="icons/linkedin-black.png")}}" alt="LinkedIn Icon" width="25" height="25" title="LinkedIn"> Tobias Bück</a></p>
-        <p class="mt-3 text-secondary"><a class="text-secondary" href="https://github.com/buecktobias"><img src="{{url_for("static", filename="icons/github.png")}}" alt="Github Icon" width="25" height="25" title="Github"> Tobias Bück</a></p>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-12">
+            <img src="{{ url_for('static', filename = 'profile.jpeg') }}" alt="Profil Bild Tobias Bück"
+                 class="img-thumbnail">
+            <p class="mt-3 text-secondary"><img src="{{ url_for("static", filename="icons/person-circle.svg") }}"
+                                                alt="Person Icon" width="25" height="25" title="Person Name"> Tobias
+                Bück</p>
+            <p class="mt-3 text-secondary"><a class="text-secondary" href="mailto:buecktobias@gmail.com"><img
+                    src="{{ url_for("static", filename="icons/envelope-fill.svg") }}" alt="Email" width="25" height="25"
+                    title="Email"> buecktobias@gmail.com</a></p>
+            <p class="mt-3 text-secondary"><img src="{{ url_for("static", filename="icons/signpost.svg") }}"
+                                                alt="Signpost Icon" width="25" height="25" title="City"> Mainz/Germany
+            </p>
+            <p class="mt-3 text-secondary"><img src="{{ url_for("static", filename="icons/calendar.svg") }}"
+                                                alt="Calendar Icon" width="25" height="25" title="Birthday"> 16.
+                October, 2001</p>
+            <p class="mt-3 text-secondary"><a class="text-secondary"
+                                              href="https://www.linkedin.com/in/tobias-b%C3%BCck-025300182/"><img
+                    src="{{ url_for("static", filename="icons/linkedin-black.png") }}" alt="LinkedIn Icon" width="25"
+                    height="25" title="LinkedIn"> Tobias Bück</a></p>
+            <p class="mt-3 text-secondary"><a class="text-secondary" href="https://github.com/buecktobias"><img
+                    src="{{ url_for("static", filename="icons/github.png") }}" alt="Github Icon" width="25" height="25"
+                    title="Github"> Tobias Bück</a></p>
         </div>
-    <div class="col-lg-7 col-md-8 col-sm-8 col-12">
-      <div class="bg-dark text-white p-3">
-        <h1>Tobias Bück Portfolio</h1>
-          <h3> Software Developer</h3>
-          <hr>
-          {{ short_description_text }}
-      </div>
-        <h3 class="mt-3 ml-3">Personal Projects</h3>
-        <hr>
+        <div class="col-lg-7 col-md-8 col-sm-8 col-12">
+            <div class="bg-dark text-white p-3">
+                <h1>Tobias Bück Portfolio</h1>
+                <h3> Software Developer</h3>
+                <hr>
+                {{ short_description_text }}
+            </div>
+            <h3 class="mt-3 ml-3">Personal Projects</h3>
+            <hr>
             <div class="row">
-                <div class="col-sm-4 col-12 text-center"><a href="https://www.uni-mainz.de"><img class="img-fluid" src="{{url_for("static", filename="jgu.png")}}" alt="JGU" title="JGU"></a></div>
+                <div class="col-sm-4 col-12 text-center"><a href="https://www.uni-mainz.de"><img class="img-fluid"
+                                                                                                 src="{{ url_for("static", filename="jgu.png") }}"
+                                                                                                 alt="JGU" title="JGU"></a>
+                </div>
                 <div class="col-sm-8 col-12">
-                    <h4>{{ ahs_project_title|safe}}</h4>
+                    <h4>{{ ahs_project_title|safe }}</h4>
                     <p>
                         {{ ahs_project_text|safe }}
                     </p>
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-sm-4 col-12 text-center"><a href="https://bwinf.de/"><img class="img-fluid w-50" src="{{url_for("static", filename="BWinf38_image.jpg")}}" alt="BWinf" title="BWinf"></a></div>
+                <div class="col-sm-4 col-12 text-center"><a href="https://bwinf.de/"><img class="img-fluid w-50"
+                                                                                          src="{{ url_for("static", filename="BWinf38_image.jpg") }}"
+                                                                                          alt="BWinf" title="BWinf"></a>
+                </div>
                 <div class="col-sm-8 col-12">
                     <h4>{{ facharbeit_project_title|safe }}</h4>
                     <p>
@@ -44,37 +69,64 @@
             </div>
             <div class="row mt-5">
                 <div class="col">
-                <h4>{{ data_science_title }}</h4>
+                    <h4>{{ data_science_title }}</h4>
                     {{ data_science_description|safe }}
                     <div class="row mt-3">
                         <div class="col col-md-6 col-sm-12 col-12">
-                            <img class="img-fluid w-100" src="{{url_for("static", filename="covid_wordcloud.png")}}" alt="covid19" title="covid19">
+                            <img class="img-fluid w-100" src="{{ url_for("static", filename="covid_wordcloud.png") }}"
+                                 alt="covid19" title="covid19">
                         </div>
                         <div class="col col-md-6 col-sm-0 col-0">
                             {{ text_wordcloud }}
                         </div>
                     </div>
                     <hr>
-                <h6>{{ nyc_price_title }}</h6>
+                    <h6>{{ nyc_price_title }}</h6>
                     <p>{{ nyc_price_text|safe }}</p>
-                    <img class="img-fluid w-100" src="{{url_for("static", filename="nyc_prices_map.png")}}" alt="NYC_Prices" title="NYC Prices">
+                    <img class="img-fluid w-100" src="{{ url_for("static", filename="nyc_prices_map.png") }}"
+                         alt="NYC_Prices" title="NYC Prices">
 
                 </div>
 
             </div>
             <div class="row mt-5">
-            <a href="https://www.kaggle.com/tobiasbueck"> {{ kaggle_profile }}</a>
+                <a href="https://www.kaggle.com/tobiasbueck"> {{ kaggle_profile }}</a>
             </div>
             <div class="row mt-5">
-            <h3>{{ nlp_blog_title }}</h3>
-                <a href="{{ url_for("blog_nlp", language_code="en") }}">
-                    <img class="img-fluid mt-3 mb-3" src="{{ url_for("static", filename="nlp-blog/tripadvisor.png") }}" alt="Tripadvisor">
-                </a>
-                <a href="{{ url_for("blog_nlp", language_code="en") }}">{{ nlp_blog_title }}</a>
+                <div class="col">
+                    <h3>{{ nlp_blog_title }}</h3>
+                    <a href="{{ url_for("blog_nlp", language_code="en") }}">
+                        <img class="img-fluid mt-3 mb-3"
+                             src="{{ url_for("static", filename="nlp-blog/tripadvisor.png") }}"
+                             alt="Tripadvisor">
+                    </a>
+
+                    <form class="mt-3 mb-3">
+                        <div class="form-group">
+                            <label for="hotelReview">Hotel Review</label>
+                            <textarea class="form-control" id="hotelReview" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class=" mt-3 ml-3 btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                    <span class="fa fa-star {{ star1 }}"></span>
+                    <span class="fa fa-star {{ star2 }}"></span>
+                    <span class="fa fa-star {{ star3 }}"></span>
+                    <span class="fa fa-star {{ star4 }}"></span>
+                    <span class="fa fa-star {{ star5 }}"></span>
+                    <br/>
+                    <a class="mt-3" href="{{ url_for("blog_nlp", language_code="en") }}">{{ nlp_blog_title }}</a>
+                </div>
             </div>
         </div>
 
-    <div class="col-lg-2 col-md-1 col-sm-0 col-12"></div>
+        <div class="col-lg-2 col-md-1 col-sm-0 col-12"></div>
     </div>
     <div class="row mt-5 mb-5"></div>
+    <script>
+        $("#input-id").rating({'size':'lg'});
+    </script>
 {% endblock content %}
