@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, make_response
 from flask import render_template, redirect, url_for
 from flask import request
@@ -33,7 +35,8 @@ def portfolio_page(language_code="de"):
     texts = get_texts(language_code)
     all_ = texts
     all_["lang_code"] = language_code
-    return render_template("portfolio.html", **texts)
+    all_ = stars(all_, 0)
+    return render_template("portfolio.html", **all_)
 
 
 @app.route("/<language_code>/blogs/")
@@ -67,6 +70,27 @@ def draw_game_save():
         f.write(data)
     return render_template("draw.html")
 
+
+@app.route("/trip_advisor/stars/", methods=["POST"])
+def stars_api():
+    print(request.form["text"])
+    amount_stars = random.randint(0, 6)
+    d = {}
+    d = stars(d, amount_stars)
+    print(d.values())
+    print(";".join(d.values()))
+    return ";".join(d.values())
+
+
+def stars(dictionary, count):
+    star_string = "star"
+    color_class = "text-warning"
+    classes = list([color_class for _ in range(count)]) + list(["" for i in range(10)])
+    for i in range(1, 8):
+        dictionary[star_string + str(i)] = classes[i-1]
+    return dictionary
+
+
 @app.route('/')
 def home():
     if "languageCode" in request.cookies:
@@ -81,4 +105,7 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run()
+    #app.run()
+    dictionary = {}
+    count = 2
+    print(stars(dictionary, count))

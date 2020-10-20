@@ -1,11 +1,7 @@
 {% extends "basis.html" %}
 {% block head %}
     <title>Tobias Bück Portfolio</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.6/js/star-rating.min.js" type="text/javascript"></script>
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" rel="stylesheet">
-
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 {% block content %}
     <div class="row">
@@ -106,17 +102,14 @@
                             <label for="hotelReview">Hotel Review</label>
                             <textarea class="form-control" id="hotelReview" rows="3"></textarea>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class=" mt-3 ml-3 btn btn-primary">Submit</button>
-                        </div>
                     </form>
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                    <span class="fa fa-star {{ star1 }}"></span>
-                    <span class="fa fa-star {{ star2 }}"></span>
-                    <span class="fa fa-star {{ star3 }}"></span>
-                    <span class="fa fa-star {{ star4 }}"></span>
-                    <span class="fa fa-star {{ star5 }}"></span>
+
+                    <span id="star1" class="fa fa-star fa-2x"></span>
+                    <span id="star2" class="fa fa-star fa-2x"></span>
+                    <span id="star3" class="fa fa-star fa-2x"></span>
+                    <span id="star4" class="fa fa-star fa-2x"></span>
+                    <span id="star5" class="fa fa-star fa-2x"></span>
                     <br/>
                     <a class="mt-3" href="{{ url_for("blog_nlp", language_code="en") }}">{{ nlp_blog_title }}</a>
                 </div>
@@ -127,6 +120,30 @@
     </div>
     <div class="row mt-5 mb-5"></div>
     <script>
-        $("#input-id").rating({'size':'lg'});
+        document.getElementById("hotelReview").addEventListener("keypress", submitReview)
+        function submitReview(){
+            let url = "{{ url_for("stars_api") }}";
+            var text = document.getElementById("hotelReview").value;
+            var data = new FormData();
+            data.append("text", text)
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", url, false);
+
+            xhr.send(data);
+            var response = xhr.response.toString()
+            var classes = response.split(";")
+            console.log(classes)
+            for (let i = 1; i ++; i < 5){
+                console.log(i-1)
+                let sp = document.getElementById("star" + (i-1).toString());
+                console.log(sp)
+                if (sp.classList.contains('text-warning')){
+                    sp.classList.remove("text-warning")
+                }
+                if (classes[i-1] !== "") {
+                    sp.classList.add(classes[i-1])
+                }
+            }
+        }
     </script>
 {% endblock content %}
