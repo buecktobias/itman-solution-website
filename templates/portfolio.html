@@ -128,15 +128,12 @@
             data.append("text", text)
             let xhr = new XMLHttpRequest();
             xhr.open("POST", url, false);
-
+            //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send(data);
             var response = xhr.response.toString()
             var classes = response.split(";")
-            console.log(classes)
             for (let i = 1; i ++; i < 5){
-                console.log(i-1)
                 let sp = document.getElementById("star" + (i-1).toString());
-                console.log(sp)
                 if (sp.classList.contains('text-warning')){
                     sp.classList.remove("text-warning")
                 }
