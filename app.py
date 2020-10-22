@@ -151,13 +151,16 @@ def prediction_value(vector):
             best_index = i
     return best_index
 
+
 def predict_texts_rating(text, important_words, model):
+    text += "hotel"
     words = word_tokenize(text)
     df = pd.DataFrame()
     new_df = add_important_words_to_df(df, words, important_words)
     X = new_df.values
     y = model.predict(X)
     return prediction_value(y[0]) + 1
+
 
 if __name__ == '__main__':
     app.run()

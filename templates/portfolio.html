@@ -1,7 +1,7 @@
 {% extends "basis.html" %}
 {% block head %}
     <title>Tobias Bück Portfolio</title>
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 {% block content %}
     <div class="row">
@@ -103,7 +103,7 @@
                             <textarea class="form-control" id="hotelReview" rows="3"></textarea>
                         </div>
                     </form>
-
+                    <h3 id="loading"></h3>
 
                     <span id="star1" class="fa fa-star fa-2x"></span>
                     <span id="star2" class="fa fa-star fa-2x"></span>
@@ -120,27 +120,55 @@
     </div>
     <div class="row mt-5 mb-5"></div>
     <script>
-        document.getElementById("hotelReview").addEventListener("keypress", submitReview)
-        function submitReview(){
+        document.getElementById("hotelReview").addEventListener("keypress", function(){submitReview(updateStars)})
+        let isLoading = false;
+        let loading_element = document.getElementById("loading")
+        let i = 0;
+        setInterval(function (){
+            if (isLoading){
+                i++;
+                i = i % 5
+                loading_element.innerText = Array(i+1).join(".")
+            }else{
+                loading_element.innerText = ""
+            }
+        }, 800)
+        function xhrSuccess() {
+            this.callback.apply(this, this.arguments);
+        }
+
+        function xhrError() {
+            console.error(this.statusText);
+        }
+
+        function updateStars(){
+            var response = this.response.toString()
+            var classes = response.split(";")
+            for (let i = 1; i++; i < 5) {
+                let sp = document.getElementById("star" + (i - 1).toString());
+                if (sp.classList.contains('text-warning')) {
+                    sp.classList.remove("text-warning")
+                }
+                if (classes[i - 1] !== "") {
+                    sp.classList.add(classes[i - 1])
+                }
+            }
+        }
+        function submitReview(callback) {
+            isLoading = true
             let url = "{{ url_for("stars_api") }}";
             var text = document.getElementById("hotelReview").value;
             var data = new FormData();
             data.append("text", text)
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", url, false);
+            xhr.callback = callback;
+            xhr.arguments = Array.prototype.slice.call(arguments, 2);
+            xhr.onload = xhrSuccess;
+            xhr.onerror = xhrError;
+            xhr.open("POST", url, true);
             //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send(data);
-            var response = xhr.response.toString()
-            var classes = response.split(";")
-            for (let i = 1; i ++; i < 5){
-                let sp = document.getElementById("star" + (i-1).toString());
-                if (sp.classList.contains('text-warning')){
-                    sp.classList.remove("text-warning")
-                }
-                if (classes[i-1] !== "") {
-                    sp.classList.add(classes[i-1])
-                }
-            }
+
         }
     </script>
 {% endblock content %}
