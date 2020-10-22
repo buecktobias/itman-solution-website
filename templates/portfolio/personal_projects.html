@@ -2,6 +2,16 @@
 <hr>
 {% include "portfolio/personal_projects/ahs_project.html" %}
 {% include "portfolio/personal_projects/facharbeit.html" %}
+<p class="mt-3 mb-3">
+    <a class="text-dark" data-toggle="collapse" href="#collapseProjects" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        <h5 class="ml-5">Show More Projects</h5>
+    </a>
+</p>
+<div class="collapse" id="collapseProjects">
+    {% include "portfolio/personal_projects/ioi_qualifikation.html" %}
+</div>
+
 <div class="row mt-5">
     <div class="col">
         <h4>{{ data_science_title }}</h4>

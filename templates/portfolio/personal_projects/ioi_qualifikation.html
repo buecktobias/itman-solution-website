@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col">
+        <img class="img-fluid w-25"
+             src="{{ url_for("static", filename="IOI_logo.png") }}"
+             alt="Code IOI" title="Code IOI">
+        <h4>{{ ioi_title|safe }}</h4>
+        <p>
+            {{ ioi_text|safe }}
+        </p>
+    </div>
+</div>
