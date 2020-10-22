@@ -100,7 +100,7 @@
                     <form class="mt-3 mb-3">
                         <div class="form-group">
                             <label for="hotelReview">Hotel Review</label>
-                            <textarea class="form-control" id="hotelReview" rows="3"></textarea>
+                            <textarea placeholder="I love this hotel its great" class="form-control" id="hotelReview" rows="3"></textarea>
                         </div>
                     </form>
                     <h3 id="loading"></h3>
@@ -133,6 +133,17 @@
                 loading_element.innerText = ""
             }
         }, 800)
+        let example_text = "I love this hotel. It is great. The parking was great. My room was very big."
+        let k = 0
+        setInterval(
+            function(){
+                k++;
+                k = k % example_text.length
+                let text = example_text.slice(0, k);
+                document.getElementById("hotelReview").setAttribute("placeholder", text)
+            }, 100
+        )
+
         function xhrSuccess() {
             this.callback.apply(this, this.arguments);
         }
