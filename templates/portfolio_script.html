@@ -1,0 +1,66 @@
+<script>
+
+    document.getElementById("hotelReview").addEventListener("keypress", function () {
+        submitReview(updateStars)
+    })
+    let isLoading = false;
+    let loading_element = document.getElementById("loading")
+    let i = 0;
+    setInterval(function () {
+        if (isLoading) {
+            i++;
+            i = i % 5
+            loading_element.innerText = Array(i + 1).join(".")
+        } else {
+            loading_element.innerText = ""
+        }
+    }, 800)
+    let example_text = "I love this hotel. It is great. The parking was great. My room was very big."
+    let k = 0
+    setInterval(
+        function () {
+            k++;
+            k = k % example_text.length
+            let text = example_text.slice(0, k);
+            document.getElementById("hotelReview").setAttribute("placeholder", text)
+        }, 100
+    )
+
+    function xhrSuccess() {
+        this.callback.apply(this, this.arguments);
+    }
+
+    function xhrError() {
+        console.error(this.statusText);
+    }
+
+    function updateStars() {
+        isLoading = false;
+        var response = this.response.toString()
+        var classes = response.split(";")
+        for (let i = 1; i++; i < 5) {
+            let sp = document.getElementById("star" + (i - 1).toString());
+            if (sp.classList.contains('text-warning')) {
+                sp.classList.remove("text-warning")
+            }
+            if (classes[i - 1] !== "") {
+                sp.classList.add(classes[i - 1])
+            }
+        }
+    }
+
+    function submitReview(callback) {
+        isLoading = true
+        let url = "{{ url_for("stars_api") }}";
+        var text = document.getElementById("hotelReview").value;
+        var data = new FormData();
+        data.append("text", text)
+        let xhr = new XMLHttpRequest();
+        xhr.callback = callback;
+        xhr.arguments = Array.prototype.slice.call(arguments, 2);
+        xhr.onload = xhrSuccess;
+        xhr.onerror = xhrError;
+        xhr.open("POST", url, true);
+        xhr.send(data);
+    }
+</script>
