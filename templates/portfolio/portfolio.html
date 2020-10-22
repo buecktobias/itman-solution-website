@@ -1,0 +1,17 @@
+{% extends "basis.html" %}
+{% block head %}
+    <title>Tobias Bück Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-12">
+            {% include "portfolio/quick_facts.html" %}
+        </div>
+        <div class="col-lg-7 col-md-8 col-sm-8 col-12">
+            {% include "portfolio/short_description.html" %}
+            {% include "portfolio/personal_projects.html" %}
+        </div>
+        <div class="col-lg-2 col-md-1 col-sm-0 col-12"></div>
+    </div>
+{% endblock content %}

@@ -7,7 +7,6 @@ import json
 app = Flask(__name__)
 
 
-
 def get_languages():
     return ["de", "en"]
 
@@ -35,7 +34,7 @@ def portfolio_page(language_code="de"):
     all_ = texts
     all_["lang_code"] = language_code
     all_ = stars(all_, 0)
-    return render_template("portfolio.html", **all_)
+    return render_template("portfolio/portfolio.html", **all_)
 
 
 @app.route("/<language_code>/blogs/")
@@ -99,7 +98,6 @@ def home():
     resp = make_response(redirect("#"))
     resp.set_cookie('languageCode', best_language)
     return resp
-
 
 
 if __name__ == '__main__':
