@@ -1,5 +1,9 @@
 {
   "de": {
+    "lang_code": "de",
+    "description_tag": "Meine Portfolio Seite, mit meinen Persönlichen Projekten",
+    "keywords_tag": "Tobias Bück, Portfolio, AHS Uni Mainz, Projekte, Mainz, IT, Informatik, Webseite",
+    "author_tag": "Tobias Bück",
     "short_description_text": "Ich interessiere mich sehr für Software Entwicklung. In meiner Freizeit programmiere ich viel.",
     "ahs_project_title": "AHS Webseite",
     "ahs_project_text": "Ich habe für die JGU-Mainz die Webseite des Hochschulsports entwickelt.Diese habe ich mit Wordpress entwickelt.<br/><a href=\"https://www.ahs.uni-mainz.de/\">Zur Webseite</a>",
@@ -16,6 +20,10 @@
     "ioi_text": "Ende 2019 konnte ich auf Grund meines guten Ergebnisses beim BWinf bei der IOI-Qualifikation teilnehmen. Der IOI (Internationale Informatik Olympiade) ist ein internationaler Programmierwettkampf, bei welchem die besten Programmierer aus allen Ländern gegeneinander antreten.\nAufgrund der geforderten Schnelligkeit des Programms habe ich bei diesem Wettbewerb in C++ programmiert.\nBei der IOI-Qualifikation war die Schnelligkeit des Programms ausschlaggebend, da das programmierte Programm innerhalb einer Sekunde terminieren musste. Deswegen waren Algorithmen und deren Zeit-Komplexität entscheidend. Bei diesem Wettkampf habe ich deshalb Erfahrungen mit sehr vielen Algorithmen gesammelt.\n"
   },
   "en": {
+    "lang_code": "en",
+    "description_tag": "My Portfolio Page, with my personal projects",
+    "keywords_tag": "Tobias Bück, portfolio, AHS University Mainz, projects, Mainz, IT, computer science, website",
+    "author_tag": "Tobias Bück",
     "short_description_text": "I am interested in Software Development. Also doing a lot of Data Science Projects.",
     "ahs_project_title": "AHS Website",
     "ahs_project_text": "I developed the website of the university sports at the Johannes Gutenberg University in Mainz. The website was developed with Wordpress.<br/><a href=\"https://www.ahs.uni-mainz.de/\">The Website</a>",

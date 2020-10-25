@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{ description_tag }}">
+    <meta name="keywords" content="{{ keywords_tag }}">
+    <meta name="author" content="{{ author_tag}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -36,8 +39,11 @@
             </ul>
         </div>
     </nav>
+    <div class="mt-5 mb-5" id="content">
     {% block content %}
     {% endblock %}
+    <br/>
+    </div>
     <div class="mt-5 footer-copyright text-center text-white py-3 bg-dark">© 2020 Copyright:
         <a href="http://www.itman.solutions"> itman.solutions</a>
     </div>

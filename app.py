@@ -16,7 +16,7 @@ def get_default_language():
 
 
 def get_texts(language_code):
-    with open('texts.json') as f:
+    with open('portfolio_texts.json') as f:
         language_texts = json.load(f)
     return language_texts.get(language_code)
 
@@ -41,6 +41,11 @@ def portfolio_page(language_code="de"):
 def blogs(language_code="de"):
     if request.cookies["languageCode"] != language_code:
         return redirect(url_for("blogs", language_code=request.cookies["languageCode"]))
+    if language_code not in get_languages():
+        return redirect(url_for("portfolio_page", language_code=get_default_language()))
+    texts = get_texts(language_code)
+    all_ = texts
+    all_["lang_code"] = language_code
     return "lol"
 
 
@@ -48,7 +53,6 @@ def blogs(language_code="de"):
 def blog_nlp(language_code="de"):
     if language_code != "en":
         return redirect(url_for("blog_nlp", language_code="en"))
-
     with open('nlp_blog') as f:
         blog = json.load(f)
     blog["lang_code"] = language_code
