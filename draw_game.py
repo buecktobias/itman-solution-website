@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
-
+import numpy as np
+import tensorflow as tf
 
 def get_pixel(x, y, matrix, scale):
     x2 = x * scale + scale
@@ -26,19 +27,26 @@ def scale_down(x_scale, y_scale, old_img, old_img_width, old_img_height):
     return new_img
 
 
-if __name__ == '__main__':
-    with open("static/drawings/19:40:38648200.txt") as img:
-        values = img.read().split(",")
+def is_apple(image_data):
+    values = image_data.split(",")
     image_size = 280
     red_values = values[::4]
     matrix = []
-    for i in range(image_size, image_size*image_size+1, image_size):
-        matrix.append(list(map(lambda x: 255 - int(x), red_values[i-image_size: i])))
-    print(len(matrix))
-    print(matrix[:2])
-    #matrix = [[1, 0],
-    #          [0, 1]]
-    plt.imshow(matrix)
+    for i in range(image_size, image_size * image_size + 1, image_size):
+        matrix.append(list(map(lambda x: 255 - int(x), red_values[i - image_size: i])))
+    new_image = scale_down(10, 10, matrix, image_size, image_size)
+    plt.imshow(new_image)
+
     plt.show()
-    plt.imshow(scale_down(10, 10, matrix, image_size, image_size))
-    plt.show()
+    X = np.array([list(map(lambda x: list([i / 255 for i in x]), new_image))])
+    X = X.reshape((-1, 28, 28, 1))
+    # TODO load model
+    model = tf.keras.models.load_model("apple_model")
+    y = model.predict_classes(X)[0]
+    if y == 0:
+        return True
+    return False
+
+
+if __name__ == '__main__':
+    pass

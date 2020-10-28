@@ -2,6 +2,7 @@ from trip_advisor_review import predict_texts_rating, important_words, model
 from flask import Flask, make_response
 from flask import render_template, redirect, url_for
 from flask import request
+from draw_game import *
 import json
 
 app = Flask(__name__)
@@ -64,13 +65,13 @@ def draw_game():
     return render_template("draw.html")
 
 
-@app.route("/draw/save", methods=["POST"])
-def draw_game_save():
+@app.route("/draw/apple/", methods=["POST"])
+def draw_game_apple():
     data = request.form["data"]
-    filename = request.form["filename"]
-    with open(f"static/drawings/{filename}.txt", "w") as f:
-        f.write(data)
-    return render_template("draw.html")
+    if is_apple(data):
+        return "Yeah It is an Apple!"
+    else:
+        return "I do not see an apple!"
 
 
 @app.route("/trip_advisor/stars/", methods=["POST", "GET"])
