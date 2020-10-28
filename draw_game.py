@@ -35,14 +35,10 @@ def is_apple(image_data):
     for i in range(image_size, image_size * image_size + 1, image_size):
         matrix.append(list(map(lambda x: 255 - int(x), red_values[i - image_size: i])))
     new_image = scale_down(10, 10, matrix, image_size, image_size)
-    plt.imshow(new_image)
-
-    plt.show()
     X = np.array([list(map(lambda x: list([i / 255 for i in x]), new_image))])
     X = X.reshape((-1, 28, 28, 1))
-    # TODO load model
     model = tf.keras.models.load_model("apple_model")
-    y = model.predict_classes(X)[0]
+    y = np.argmax(model.predict(X), axis=-1)[0]
     if y == 0:
         return True
     return False
