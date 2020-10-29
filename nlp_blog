@@ -1,4 +1,8 @@
 {
+    "description_tag": "An article about my Trip Advisor Review Classifiction",
+    "keywords_tag": "Trip Advisor, Reviews, Classification, Computer Science, Machine Learning",
+    "author_tag": "Tobias Bück",
+    "lang_code": "en",
     "blog_author": "Tobias Bück",
     "blog_created": "18/10/2020",
     "blog_title": "NLP with Trip Advisor Reviews!",
