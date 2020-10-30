@@ -1,4 +1,4 @@
-from trip_advisor_review import predict_texts_rating, important_words, model
+from trip_advisor_review import predict_texts_rating
 from flask import Flask, make_response
 from flask import render_template, redirect, url_for
 from flask import request
@@ -77,9 +77,9 @@ def draw_game_apple():
 @app.route("/trip_advisor/stars/", methods=["POST", "GET"])
 def stars_api():
     text = request.form["text"]
-    amount_stars = predict_texts_rating(text, important_words, model)
+    amount_stars = predict_texts_rating(text)
     d = {}
-    d = stars(d, amount_stars)
+    d = stars(d, amount_stars+1)
     return ";".join(d.values())
 
 

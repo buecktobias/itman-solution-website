@@ -5,12 +5,12 @@
     })
     let isLoading = false;
     let loading_element = document.getElementById("loading")
-    let i = 0;
+    let loading_i = 0;
     setInterval(function () {
         if (isLoading) {
-            i++;
-            i = i % 5
-            loading_element.innerText = Array(i + 1).join(".")
+            loading_i++;
+            loading_i = loading_i % 5
+            loading_element.innerText = Array(loading_i + 1).join(".")
         } else {
             loading_element.innerText = ""
         }

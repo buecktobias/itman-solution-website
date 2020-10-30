@@ -10,7 +10,7 @@
                         height="280"></canvas>
             </div>
             <div class="row">
-                <h3 id="loading"></h3>
+                <h3 id="loading_apple"></h3>
             </div>
             <div class="row">
                 <h3 id="is_apple"></h3>
@@ -145,15 +145,15 @@
     }
 
     let isLoadingApple = false;
-    let loading_element = document.getElementById("loading")
-    let i = 0;
+    let loading_element_apple = document.getElementById("loading_apple")
+    let apple_i = 0;
     setInterval(function () {
         if (isLoadingApple) {
-            i++;
-            i = i % 5
-            loading_element.innerText = Array(i + 1).join(".")
+            apple_i++;
+            apple_i = apple_i % 5
+            loading_element_apple.innerText = Array(apple_i + 1).join(".")
         } else {
-            loading_element.innerText = ""
+            loading_element_apple.innerText = ""
         }
     }, 200)
 </script>
