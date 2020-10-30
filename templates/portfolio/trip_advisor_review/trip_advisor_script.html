@@ -38,13 +38,14 @@
         isLoading = false;
         var response = this.response.toString()
         var classes = response.split(";")
-        for (let i = 1; i++; i < 5) {
-            let sp = document.getElementById("star" + (i - 1).toString());
+        for (let star_i = 1;star_i <= 5; star_i++) {
+            id = "star" + (star_i).toString()
+            let sp = document.getElementById(id);
             if (sp.classList.contains('text-warning')) {
                 sp.classList.remove("text-warning")
             }
-            if (classes[i - 1] !== "") {
-                sp.classList.add(classes[i - 1])
+            if (classes[star_i] !== "") {
+                sp.classList.add(classes[star_i])
             }
         }
     }
