@@ -24,6 +24,14 @@
 <div class="row mt-5">
     <a href="https://www.kaggle.com/tobiasbueck"> {{ kaggle_profile }}</a>
 </div>
+<div class="row mt-5 ml-4 mr-1">
+    <div class="col-md-10 col-12">
+        {% include "draw_app.html" %}
+    </div>
+    <div class="col-md-2 col-12">
+
+    </div>
+</div>
 <div class="row mt-5">
     <div class="col">
         <h3>{{ nlp_blog_title }}</h3>
@@ -37,4 +45,5 @@
         <a class="mt-3" href="{{ url_for("blog_nlp", language_code="en") }}">{{ nlp_blog_title }}</a>
     </div>
 </div>
+
 

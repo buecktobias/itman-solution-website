@@ -62,7 +62,7 @@ def blog_nlp(language_code="de"):
 
 @app.route("/draw/")
 def draw_game():
-    return render_template("draw.html")
+    return render_template("draw_complete_website.html")
 
 
 @app.route("/draw/apple/", methods=["POST"])
