@@ -1,6 +1,9 @@
 import numpy as np
 import tensorflow as tf
 
+model = tf.keras.models.load_model("apple_model")
+
+
 def get_pixel(x, y, matrix, scale):
     x2 = x * scale + scale
     x1 = x * scale
@@ -36,7 +39,6 @@ def is_apple(image_data):
     new_image = scale_down(10, 10, matrix, image_size, image_size)
     X = np.array([list(map(lambda x: list([i / 255 for i in x]), new_image))])
     X = X.reshape((-1, 28, 28, 1))
-    model = tf.keras.models.load_model("apple_model")
     y = np.argmax(model.predict(X), axis=-1)[0]
     if y == 0:
         return True
