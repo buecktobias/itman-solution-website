@@ -21,6 +21,12 @@ def get_texts(language_code):
         language_texts = json.load(f)
     return language_texts.get(language_code)
 
+@app.before_request
+def before_request():
+    if request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 @app.route("/sitemap/")
 def sitemap():
