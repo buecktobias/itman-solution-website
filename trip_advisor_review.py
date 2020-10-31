@@ -1,10 +1,11 @@
 import pandas as pd
 from nltk import word_tokenize
+import nltk
 import numpy as np
 import pickle
 import sklearn
 
-
+nltk.download('punkt')
 def add_important_words_to_df(df, words, important_words):
     df = df.copy()
     unique_words = list(map(lambda x: set(x), words))
