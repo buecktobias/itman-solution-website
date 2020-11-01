@@ -23,7 +23,7 @@ def get_texts(language_code):
 
 @app.before_request
 def before_request():
-    if request.url.startswith('http://'):
+    if "127.0.0.1" not in request.url and request.url.startswith('http://'):
         url = request.url.replace('http://', 'https://', 1)
         code = 301
         return redirect(url, code=code)
@@ -112,4 +112,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5001)
