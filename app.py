@@ -77,7 +77,7 @@ def draw_game_apple():
     if is_apple(data):
         return "Yeah It is an Apple!"
     else:
-        return "I do not see an apple!"
+        return "I do not see an apple! maybe its too small"
 
 
 @app.route("/trip_advisor/stars/", methods=["POST", "GET"])
