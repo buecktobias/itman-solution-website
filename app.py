@@ -29,6 +29,11 @@ def set_language(language):
     return redirect(url_for("home"))
 
 
+@app.route("/blogs/cocktail-database/")
+def database_blog():
+    return render_template("blogs/cocktail_database.html", blog_title="Cocktail Database", blog_author="Tobias Bück", blog_created="1/11/2020")
+
+
 @app.before_request
 def before_request():
     print("HAHA")
@@ -67,7 +72,7 @@ def blogs(language_code="de"):
     texts = get_texts(language_code)
     all_ = texts
     all_["lang_code"] = language_code
-    return render_template("blogs_overview.html", **all_)
+    return render_template("blogs/blogs_overview.html", **all_)
 
 
 @app.route("/<language_code>/blogs/nlp-with-trip-advisor-reviews")
@@ -78,7 +83,7 @@ def blog_nlp(language_code="de"):
     with open('nlp_blog') as f:
         blog = json.load(f)
     blog["lang_code"] = language_code
-    return render_template("nlp_blog_2.html", **blog)
+    return render_template("blogs/nlp_blog_2.html", **blog)
 
 
 @app.route("/draw/")

@@ -1,0 +1,18 @@
+{% extends "blogs/blogs_basis.html" %}
+{% block innerColumn %}
+    <img class="img-fluid" src="{{ url_for("static", filename="cocktail_blog/cocktails_big.jpg") }}" alt="cocktail">
+    <h1 class="mt-3 ml-4">Cocktail Database</h1>
+    <p>
+        In school we created a database.
+        The database is for a imaginary smartphone app or website.
+    </p>
+    <img class="img-fluid my-3" src="{{ url_for("static", filename="cocktail_blog/smartphone_app.png") }}"
+         alt="Cocktail Smartphone App">
+    <p>
+    There are Cocktails, each cocktail has a name. The Cocktails also have different kind of glasses.
+    Cocktails are mixed with different kind of drinks.
+    </p>
+        <img class="img-fluid my-3" src="{{ url_for("static", filename="cocktail_blog/er_diagram2.png") }}"
+         alt="ER Diagram">
+    <p>
+{% endblock %}
