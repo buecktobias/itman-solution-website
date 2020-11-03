@@ -4,16 +4,19 @@
 
 
     <h1>An Apple A Day Keeps The Doctor Away!</h1>
-        <img width=600 class="img-fluid"
+    <img width=600 class="img-fluid"
          src="https://www.miritz.com/fileadmin/_processed_/6/2/csm_miritz-apfel-header_96089c2096.jpg">
 </div>
 
 <br/>
 <h3 class="text-secondary ml-5">Draw an apple!</h3>
 
-<div class="" id="draw">
+<div class="mb-3" id="draw">
     <div class="row text-center">
         <div class="col">
+            <div class="row">
+                <h3 class="text-warning">If you can not draw! Click Reset!</h3>
+            </div>
             <div class="row">
                 <canvas class="mt-5 mb-5" id="canvas-display" width="280"
                         height="280"></canvas>
@@ -25,8 +28,9 @@
                 <h3 id="is_apple"></h3>
             </div>
             <div class="row">
-                <button class="btn btn-primary ml-5" onclick="save();">Save</button>
-                <button class="btn btn-primary" onclick="location.reload(true);">Reset</button>
+
+                <button class="btn btn-dark ml-5 mr-2" onclick="save();">Save</button>
+                <button class="btn btn-dark" onclick="location.reload(true);">Reset</button>
 
             </div>
         </div>
