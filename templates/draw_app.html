@@ -10,7 +10,7 @@
     .my_tooltip .my_tooltiptext {
         min-width: 200px;
         visibility: hidden;
-        background-color: rgba(103, 103, 103, 0.3);
+        background-color: rgba(103, 103, 103, 0.4);
         color: #fff;
         text-align: center;
         padding: 8px;
@@ -48,20 +48,22 @@
                 <canvas class="mt-5 mb-5" id="canvas-display" width="280"
                         height="280"></canvas>
             </div>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="my_tooltip">
-                    <a class="d-none d-md-block" href="https://web.whatsapp.com/send/?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
+                    <a class="d-none d-md-block"
+                       href="https://web.whatsapp.com/send/?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
                        target="_blank">
                         <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
                     </a>
 
-                    <a class="d-sm-block d-md-none" href="whatsapp://send?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
+                    <a class="d-sm-block d-md-none"
+                       href="whatsapp://send?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
                        data-action="share/whatsapp/share"
                        target="_blank">
                         <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
                     </a>
                     <span id="my_tooltiptext" class="my_tooltiptext">Let your friends draw an apple!</span>
-                    </div>
+                </div>
 
             </div>
             <div class="row">
@@ -80,109 +82,54 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#canvas-display').paintBrush();
-    });
-    (function ($) {
-        $.fn.paintBrush = function (options) {
-            var undoHistory = [];
-            var settings = {
-                    'targetID': 'canvas-display'
-                },
+    let draw = 0;
+    let canvas = document.getElementById("canvas-display");
+    let cntxt = canvas.getContext("2d");
+    var rect = canvas.getBoundingClientRect();
+    let c_top = rect.top;
+    let c_left = rect.left;
+    initializeCanvas();
+    function initializeCanvas() {
+        cntxt = document.getElementById("canvas-display").getContext("2d");
+        cntxt.lineCap = "round";
+        cntxt.lineWidth = 10;
+        //Fill it with white background
+        cntxt.save();
+        cntxt.fillStyle = '#fff';
+        cntxt.fillRect(0, 0, cntxt.canvas.width, cntxt.canvas.height);
+        cntxt.restore();
+    }
 
-                $this = $(this),
-                o = {},
-                ui = {},
-
-                core = {
-                    init: function (options) {
-                        ui.$loadParentDiv = o.targetID;
-                        core.draw();
-                        //core.toggleScripts();
-                    },
-
-                    canvasInit: function () {
-                        context = document.getElementById("canvas-display").getContext("2d");
-                        context.lineCap = "round";
-                        context.lineWidth = 10;
-                        //Fill it with white background
-                        context.save();
-                        context.fillStyle = '#fff';
-                        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-                        context.restore();
-                    },
-
-                    saveActions: function () {
-                        var imgData = document.getElementById("canvas-display").toDataURL("image/png");
-                        undoHistory.push(imgData);
-                        $('#undo').removeAttr('disabled');
-
-                    },
-
-
-                    draw: function () {
-                        var canvas, cntxt, top, left, draw, draw = 0;
-                        canvas = document.getElementById("canvas-display");
-                        cntxt = canvas.getContext("2d");
-                        top = $('#canvas-display').offset().top;
-                        left = $('#canvas-display').offset().left;
-                        core.canvasInit();
-                        //Drawing Code
-
-                        $('#canvas-display').mousedown(function (e) {
-                            if (e.button == 0) {
-                                draw = 1;
-                                core.saveActions(); //Start The drawing flow. Save the state
-                                cntxt.beginPath();
-                                cntxt.moveTo(e.pageX - left, e.pageY - top);
-                            } else {
-                                draw = 0;
-                            }
-                        })
-                            .mouseup(function (e) {
-                                if (e.button != 0) {
-                                    draw = 1;
-                                } else {
-                                    draw = 0;
-                                    cntxt.lineTo(e.pageX - left + 1, e.pageY - top + 1);
-                                    cntxt.stroke();
-                                    cntxt.closePath();
-                                }
-                                save();
-                            })
-                            .mousemove(function (e) {
-                                if (draw == 1) {
-                                    cntxt.lineTo(e.pageX - left + 1, e.pageY - top + 1);
-                                    cntxt.stroke();
-                                }
-
-                            });
-
-                    },
-
-
-                    toggleScripts: function () {
-                        $('#colors').slideToggle(400);
-                        $('#control-buttons').toggle(400);
-                    }
-                };
-
-            $.extend(true, o, settings, options);
-
-            core.init();
-
-        };
-    })(jQuery);
-
+    canvas.addEventListener("mousedown", function (e) {
+        if (e.button === 0) {
+            draw = 1;
+            cntxt.beginPath();
+            cntxt.moveTo(e.pageX - c_left, e.pageY - c_top);
+        } else {
+            draw = 0;
+        }
+    })
+    canvas.addEventListener("mouseup", function (e) {
+        if (e.button !== 0) {
+            draw = 1;
+        } else {
+            draw = 0;
+            cntxt.lineTo(e.pageX - c_left + 1, e.pageY - c_top + 1);
+            cntxt.stroke();
+            cntxt.closePath();
+        }
+        save();
+    })
+    canvas.addEventListener("mousemove", function (e) {
+        if (draw === 1) {
+            cntxt.lineTo(e.pageX - c_left + 1, e.pageY - c_top + 1);
+            cntxt.stroke();
+        }
+    })
 
 </script>
 <script type="text/javascript">
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
+
 
     function save() {
         isLoadingApple = true
@@ -198,7 +145,7 @@
             document.getElementById("is_apple").innerText = xhr.responseText
             isLoadingApple = false
             document.getElementById("my_tooltiptext").style.visibility = "visible";
-            setTimeout(function(){
+            setTimeout(function () {
                 document.getElementById("my_tooltiptext").style.visibility = "hidden";
             }, 2000);
         }
