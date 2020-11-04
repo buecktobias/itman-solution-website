@@ -1,4 +1,31 @@
 <link rel="stylesheet" href="{{ url_for("static", filename="draw2.css") }}">
+<style>
+    /* Tooltip container */
+    .my_tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Tooltip text */
+    .my_tooltip .my_tooltiptext {
+        visibility: hidden;
+        width: 150px;
+        background-color: rgba(103, 103, 103, 0.3);
+        color: #fff;
+        text-align: center;
+        padding: 8px;
+        border-radius: 6px;
+
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .my_tooltip:hover .my_tooltiptext {
+        visibility: visible;
+    }
+</style>
 
 <div class="row">
 
@@ -22,11 +49,15 @@
                         height="280"></canvas>
             </div>
             <div class="row">
-                <a href="whatsapp://send?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
-                   data-action="share/whatsapp/share"
-                   target="_blank">
-                    <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
-                </a>
+                <div class="my_tooltip">
+                    <a href="whatsapp://send?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
+                       data-action="share/whatsapp/share"
+                       target="_blank">
+                        <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                    </a>
+                    <span id="my_tooltiptext" class="my_tooltiptext">Let your friends draw an apple!</span>
+
+                </div>
             </div>
             <div class="row">
                 <h3 id="loading_apple"></h3>
@@ -161,6 +192,10 @@
         xhr.onload = function () {
             document.getElementById("is_apple").innerText = xhr.responseText
             isLoadingApple = false
+            document.getElementById("my_tooltiptext").style.visibility = "visible";
+            setTimeout(function(){
+                document.getElementById("my_tooltiptext").style.visibility = "hidden";
+            }, 2000);
         }
     }
 
