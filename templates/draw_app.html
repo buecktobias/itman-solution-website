@@ -15,11 +15,18 @@
     <div class="row text-center">
         <div class="col">
             <div class="row">
-                <h3 class="text-warning">If you can not draw! Click Reset!</h3>
+                <h3 class="text-warning">If you can not draw, click reset!</h3>
             </div>
             <div class="row">
                 <canvas class="mt-5 mb-5" id="canvas-display" width="280"
                         height="280"></canvas>
+            </div>
+            <div class="row">
+                <a href="whatsapp://send?text=Can you Draw an Apple? {{ url_for("draw_game") }}"
+                   data-action="share/whatsapp/share"
+                   target="_blank">
+                    <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                </a>
             </div>
             <div class="row">
                 <h3 id="loading_apple"></h3>
