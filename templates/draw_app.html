@@ -82,13 +82,14 @@
     </div>
 </div>
 <script type="text/javascript">
-    let draw = 0;
+    let isDrawing = false;
     let canvas = document.getElementById("canvas-display");
     let cntxt = canvas.getContext("2d");
     var rect = canvas.getBoundingClientRect();
     let c_top = rect.top;
     let c_left = rect.left;
     initializeCanvas();
+
     function initializeCanvas() {
         cntxt = document.getElementById("canvas-display").getContext("2d");
         cntxt.lineCap = "round";
@@ -100,33 +101,80 @@
         cntxt.restore();
     }
 
+    function startDrawing(positionX, positionY) {
+        isDrawing = true;
+        cntxt.beginPath();
+        cntxt.moveTo(positionX, positionY);
+    }
+
+    function endDrawing(positionX, positionY) {
+        isDrawing = false;
+        cntxt.lineTo(positionX, positionY);
+        cntxt.stroke();
+        cntxt.closePath();
+    }
+
+    function drawTo(positionX, positionY) {
+        cntxt.lineTo(positionX, positionY);
+        cntxt.stroke();
+    }
+
+    canvas.addEventListener("touchstart", function (e) {
+        disableScroll();
+        let t = e.touches[0]
+        startDrawing(t.pageX - c_left, t.pageY - c_top);
+    })
+    canvas.addEventListener("touchmove", function (e) {
+        console.log("Move")
+        console.log(e);
+        let t = e.touches[0]
+        drawTo(t.pageX - c_left, t.pageY - c_top);
+    })
+    canvas.addEventListener("touchend", function (e) {
+        enableScroll()
+        console.log("End");
+        let t = e.touches[0]
+        endDrawing(t.pageX - c_left, t.pageY - c_top);
+    })
+
+
     canvas.addEventListener("mousedown", function (e) {
         if (e.button === 0) {
-            draw = 1;
-            cntxt.beginPath();
-            cntxt.moveTo(e.pageX - c_left, e.pageY - c_top);
-        } else {
-            draw = 0;
+            startDrawing(e.pageX - c_left, e.pageY - c_top)
         }
     })
     canvas.addEventListener("mouseup", function (e) {
-        if (e.button !== 0) {
-            draw = 1;
-        } else {
-            draw = 0;
-            cntxt.lineTo(e.pageX - c_left + 1, e.pageY - c_top + 1);
-            cntxt.stroke();
-            cntxt.closePath();
+        if (e.button === 0) {
+            endDrawing(e.pageX - c_left + 1, e.pageY - c_top + 1);
+            save();
         }
-        save();
     })
     canvas.addEventListener("mousemove", function (e) {
-        if (draw === 1) {
-            cntxt.lineTo(e.pageX - c_left + 1, e.pageY - c_top + 1);
-            cntxt.stroke();
+        if (isDrawing) {
+            drawTo(e.pageX - c_left + 1, e.pageY - c_top + 1);
         }
     })
 
+</script>
+<script>
+    function disableScroll() {
+        // Get the current page scroll position
+        scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
+        scrollLeft =
+            window.pageXOffset || document.documentElement.scrollLeft,
+
+        // if any scroll is attempted,
+        // set this to the previous value
+        window.onscroll = function () {
+             window.scrollTo(scrollLeft, scrollTop);
+        };
+    }
+
+    function enableScroll() {
+        window.onscroll = function () {
+        };
+    }
 </script>
 <script type="text/javascript">
 
