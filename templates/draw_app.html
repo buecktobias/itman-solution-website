@@ -8,8 +8,8 @@
 
     /* Tooltip text */
     .my_tooltip .my_tooltiptext {
+        min-width: 200px;
         visibility: hidden;
-        width: 150px;
         background-color: rgba(103, 103, 103, 0.3);
         color: #fff;
         text-align: center;
@@ -50,14 +50,19 @@
             </div>
             <div class="row">
                 <div class="my_tooltip">
-                    <a href="whatsapp://send?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
+                    <a class="d-none d-md-block" href="https://web.whatsapp.com/send/?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
+                       target="_blank">
+                        <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="d-sm-block d-md-none" href="whatsapp://send?text=Can you Draw an Apple? https://www.itman.solutions/draw/"
                        data-action="share/whatsapp/share"
                        target="_blank">
                         <i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i>
                     </a>
                     <span id="my_tooltiptext" class="my_tooltiptext">Let your friends draw an apple!</span>
+                    </div>
 
-                </div>
             </div>
             <div class="row">
                 <h3 id="loading_apple"></h3>
