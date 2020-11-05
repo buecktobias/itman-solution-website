@@ -131,6 +131,7 @@
         drawTo(t.pageX - c_left, t.pageY - c_top);
     })
     canvas.addEventListener("touchend", function (e) {
+        save();
         enableScroll()
         console.log("End");
         let t = e.touches[0]
