@@ -4,7 +4,6 @@ from flask import render_template, redirect, url_for, session
 from flask import request
 from draw_game import *
 import json
-from game_api import *
 
 app = Flask(__name__)
 app.secret_key = "LOLHAHA"
