@@ -4,9 +4,15 @@ from flask import render_template, redirect, url_for, session
 from flask import request
 from draw_game import *
 import json
+from game_api import *
 
 app = Flask(__name__)
 app.secret_key = "LOLHAHA"
+
+
+@app.route("/game/")
+def main_game():
+    return render_template("game/home.html")
 
 
 def get_languages():
