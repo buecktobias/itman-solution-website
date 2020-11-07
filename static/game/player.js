@@ -1,8 +1,7 @@
 class Player extends MovingObject {
     constructor(game) {
-        super(game, 500, 500, 2);
-        this.x = 500;
-        this.y = 500;
+        super(game, 500, 500, 50, 2);
+
     }
 
     update(){
@@ -12,7 +11,7 @@ class Player extends MovingObject {
     draw(ctx) {
         ctx.fillStyle = "red";
         ctx.beginPath();
-        ctx.arc(this.getRoundedX(), this.getRoundedY(), 50, 0, 2 * Math.PI);
+        ctx.arc(this.getRoundedX(), this.getRoundedY(), this.size, 0, 2 * Math.PI);
         ctx.fill();
     }
 

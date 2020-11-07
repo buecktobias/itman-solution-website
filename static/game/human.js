@@ -1,6 +1,6 @@
 class Human extends MovingObject {
     constructor(game, x, y) {
-        super(game, x, y, 0.5);
+        super(game, x, y, 30, 0.5);
         this.changeDirection();
     }
 
@@ -39,7 +39,7 @@ class Human extends MovingObject {
     draw(ctx) {
         ctx.fillStyle = "grey";
         ctx.beginPath();
-        ctx.arc(this.getRoundedX(), this.getRoundedY(), 30, 0, 2 * Math.PI);
+        ctx.arc(this.getRoundedX(), this.getRoundedY(), this.size, 0, 2 * Math.PI);
         ctx.fill();
     }
 

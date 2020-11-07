@@ -15,6 +15,11 @@ class Game {
         }, 5);
     }
 
+    getObjectsAt(atX, atY, objectsSize){
+        let all_moving_objects = this.game_objects.filter(object => object instanceof MovingObject)
+        return all_moving_objects.filter(object => Math.abs(object.x - atX) < object.size + objectsSize && Math.abs(object.y - atY) < object.size + objectsSize)
+    }
+
     addGameObject(new_game_object){
         this.game_objects.push(new_game_object);
     }

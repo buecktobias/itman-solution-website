@@ -1,19 +1,21 @@
-class MovingObject extends GameObject{
-    constructor(game, x, y, speed) {
+class MovingObject extends GameObject {
+    constructor(game, x, y, size, speed) {
         super(game);
         this.x = x;
         this.y = y;
+        this.size = size;
         this.speed = speed;
         this.isMovingUp = false;
         this.isMovingLeft = false;
         this.isMovingDown = false;
         this.isMovingRight = false;
     }
-    getRoundedX(){
+
+    getRoundedX() {
         return Math.round(this.x)
     }
 
-    getRoundedY(){
+    getRoundedY() {
         return Math.round(this.y)
     }
 
@@ -32,23 +34,33 @@ class MovingObject extends GameObject{
             this.moveRight()
         }
     }
+
     move(byX, byY) {
-        this.x += byX;
-        this.y += byY;
+        if (this.canMove(byX, byY)) {
+            this.x += byX;
+            this.y += byY;
+        }
     }
 
-    moveUp(){
-        this.move(0, - this.speed)
+    canMove(byX, byY) {
+        let newX = this.x + byX
+        let newY = this.y + byY
+        return this.game.getObjectsAt(newX, newY, this.size).length < 2;
     }
 
-    moveLeft(){
-        this.move(-this.speed,0)
+    moveUp() {
+        this.move(0, -this.speed)
     }
 
-    moveDown(){
-        this.move(0,this.speed)
+    moveLeft() {
+        this.move(-this.speed, 0)
     }
-    moveRight(){
-        this.move(this.speed,0)
+
+    moveDown() {
+        this.move(0, this.speed)
+    }
+
+    moveRight() {
+        this.move(this.speed, 0)
     }
 }
