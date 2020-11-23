@@ -14,7 +14,9 @@ var __extends = (this && this.__extends) || (function () {
 var Player = /** @class */ (function (_super) {
     __extends(Player, _super);
     function Player(game) {
-        return _super.call(this, game, 500, 500, 50, 2) || this;
+        var _this = _super.call(this, game, 500, 500, 50, 2) || this;
+        _this.isControllableClass = true;
+        return _this;
     }
     Player.prototype.update = function () {
         _super.prototype.update.call(this);

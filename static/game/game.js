@@ -29,12 +29,12 @@ var Game = /** @class */ (function () {
     };
     Game.prototype.checkKeyDown = function (e) {
         // @ts-ignore
-        var controllable = this.game_objects.filter(function (object) { return object instanceof Player; });
+        var controllable = this.game_objects.filter(function (object) { return object.hasOwnProperty("isControllableClass"); });
         controllable.forEach(function (object) { return object.checkKeyDown(e); });
     };
     Game.prototype.checkKeyUp = function (e) {
         // @ts-ignore
-        var controllable = this.game_objects.filter(function (object) { return object instanceof Player; });
+        var controllable = this.game_objects.filter(function (object) { return object.hasOwnProperty("isControllableClass"); });
         controllable.forEach(function (object) { return object.checkKeyUp(e); });
     };
     Game.prototype.checkControls = function () {

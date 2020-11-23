@@ -1,7 +1,8 @@
-class Player extends MovingObject {
+class Player extends MovingObject implements isBlocking, isControllable {
+    public isControllableClass;
     constructor(game) {
         super(game, 500, 500, 50, 2);
-
+        this.isControllableClass = true;
     }
 
     update(){

@@ -24,6 +24,17 @@ class Game {
         }, 5);
     }
 
+    getGameObjects(){
+
+        // request
+
+    }
+
+   saveGameObjects(){
+        let xhr = new XMLHttpRequest()
+        xhr.open("POST", "{{ url_for("")}}")
+
+    }
     getObjectsAt(atX, atY, objectsSize){
         // @ts-ignore
         let all_moving_objects = this.game_objects.filter(object => object instanceof MovingObject)
@@ -41,14 +52,14 @@ class Game {
 
     checkKeyDown(e) {
         // @ts-ignore
-        let controllable = this.game_objects.filter(object => object instanceof Player)
-        controllable.forEach(object => object.checkKeyDown(e))
+        let controllable = this.game_objects.filter(object => object.hasOwnProperty("isControllableClass"));
+        controllable.forEach(object => object.checkKeyDown(e));
     }
 
     checkKeyUp(e) {
-                // @ts-ignore
-        let controllable = this.game_objects.filter(object => object instanceof Player)
-        controllable.forEach(object => object.checkKeyUp(e))
+        // @ts-ignore
+        let controllable = this.game_objects.filter(object => object.hasOwnProperty("isControllableClass"));
+        controllable.forEach(object => object.checkKeyUp(e));
     }
 
     checkControls() {

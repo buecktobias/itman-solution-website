@@ -1,4 +1,4 @@
-class Human extends MovingObject {
+class Human extends MovingObject implements isBlocking{
     private is_ill: boolean;
     constructor(game, x, y) {
         super(game, x, y, 30, 0.5);

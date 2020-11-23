@@ -5,6 +5,7 @@ class GameObject{
     }
     update(){
     }
+
     draw(ctx){
 
     }

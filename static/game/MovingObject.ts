@@ -1,7 +1,7 @@
 class MovingObject extends GameObject {
-    protected x: any;
-    protected y: any;
-    protected size: any;
+    public x: any;
+    public y: any;
+    public size: any;
     private speed: any;
     protected isMovingUp: boolean;
     protected isMovingLeft: boolean;
